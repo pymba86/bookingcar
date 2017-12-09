@@ -3,16 +3,15 @@
 Автор: pymba86
 */
 
--- Создание таблицы "Счет"
+-- Создание таблицы "Платеж"
 CREATE TABLE payment
 (
   id          NUMBER(10) NOT NULL PRIMARY KEY,
-  customer_id NUMBER(10) NOT NULL,
+  order_id NUMBER(10) NOT NULL,
   status_id   NUMBER(10) NOT NULL,
   category_id NUMBER(10) NOT NULL,
   price       NUMBER(6)  NOT NULL,
-  date_create DATE       NOT NULL,
-  description VARCHAR2(255),
+  date_create DATE       NOT NULL
 
   CONSTRAINT payment_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customer (id),
   CONSTRAINT payment_category_id_fk FOREIGN KEY (category_id) REFERENCES payment_category (id),

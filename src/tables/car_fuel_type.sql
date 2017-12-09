@@ -9,11 +9,11 @@ Contents:
 -- for car_fuel_type table
 CREATE TABLE car_fuel_type
 (
-    id               NUMBER(10)      NOT NULL PRIMARY KEY, 
-    code             VARCHAR2(6)     NOT NULL, 
-    name             VARCHAR2(255)   NOT NULL
+  id   NUMBER(10)    NOT NULL PRIMARY KEY,
+  code VARCHAR2(6)   NOT NULL,
+  description VARCHAR2(255) NOT NULL
 );
 
 
-insert into car_fuel_type values(1,'BN', 'бензин');
-insert into car_fuel_type values(2,'DZ', 'дизель');
+INSERT INTO car_fuel_type VALUES (1, '92', 'АИ92');
+INSERT INTO car_fuel_type VALUES (1, '95', 'АИ95');
