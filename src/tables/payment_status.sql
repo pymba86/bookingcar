@@ -11,10 +11,10 @@ CREATE TABLE payment_status
   description VARCHAR2(100)
 );
 
--- Создание последовательности для суррогатного ключа,таблицы "Статус оплаты"
+-- Создание последовательности для суррогатного ключа,таблицы "Статус счета"
 CREATE SEQUENCE payment_status_seq;
 
--- Заполнение данными таблицы "Счет"
+-- Заполнение данными таблицы "Статус счета"
 INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'OP', 'оплачен');
 INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'NP', 'не оплачен');
 

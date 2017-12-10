@@ -23,6 +23,9 @@ CREATE OR REPLACE PACKAGE payments AS
   PROCEDURE get_status(cp_code_name    IN payment_status.code%TYPE,
                        p_status_cursor OUT SYS_REFCURSOR);
 
+  -- Общая проверка оплаченных счетов по заказу
+  -- Вывести все счета по категории
+
   -- Добавление счета на оплату
   PROCEDURE add(cp_customer_id IN customer.id%TYPE,
                 cp_price       IN payment.price%TYPE);

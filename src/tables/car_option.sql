@@ -10,11 +10,12 @@
 -- Создание таблицы "Опция автомобиля"
 CREATE TABLE car_option
 (
-    id NUMBER(10) PRIMARY KEY NOT NULL,
-    description VARCHAR2(1000) NOT NULL,
-    ref_count NUMBER(10) NOT NULL
+  id          NUMBER(10) PRIMARY KEY NOT NULL,
+  description VARCHAR2(1000)         NOT NULL,
+  ref_count   NUMBER(10)             NOT NULL
 );
 
+-- добавить триггер на добавление
 ----------------------------------------------------------------------
 -- Заполнение
 ----------------------------------------------------------------------

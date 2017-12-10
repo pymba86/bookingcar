@@ -12,10 +12,9 @@ CREATE TABLE service
   price       NUMBER         NOT NULL
 );
 
--- Создание последовательности для суррогатного ключа,таблицы "Статус оплаты"
-CREATE SEQUENCE payment_status_seq;
+-- Создание последовательности для суррогатного ключа,таблицы "Услуга"
+CREATE SEQUENCE service_seq;
 
--- Заполнение данными таблицы "Счет"
-INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'OP', 'оплачен');
-INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'NP', 'не оплачен');
+-- Заполнение данными таблицы "Услуга"
+INSERT INTO service VALUES ('OP', 'оплачен');
 
