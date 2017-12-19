@@ -11,7 +11,8 @@ CREATE TABLE orders
   date_end    DATE       NOT NULL,
 
   CONSTRAINT orders_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customer (ID),
-  CONSTRAINT orders_car_id_fk FOREIGN KEY (car_id) REFERENCES car (id)
+  CONSTRAINT orders_car_id_fk FOREIGN KEY (car_id) REFERENCES car (id),
+  CONSTRAINT orders_status_id_fk FOREIGN KEY (status_id) REFERENCES order_status (id)
 
 );
                           

@@ -2,7 +2,9 @@ CREATE TABLE car_comp
 (
   id          NUMBER(10)     NOT NULL PRIMARY KEY,
   car_id      NUMBER(10)     NOT NULL,
-  description VARCHAR2(1000) NOT NULL
+  description VARCHAR2(1000) NOT NULL,
+
+  CONSTRAINT car_comp_car_id_fk FOREIGN KEY (car_id) REFERENCES car (id)
 );
 
 -- Создание последовательности для суррогатного ключа,таблицы "Комплектация автомобиля"
@@ -17,26 +19,26 @@ FOR EACH ROW
   END;
 /
 -- Заполнение данными таблицы "Комплектация автомобиля"
-INSERT INTO car_comp (car_id,description) VALUES
-  (1,'ESP');
+INSERT INTO car_comp (car_id, description) VALUES
+  (1, 'ESP');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (1,'ABS');
+INSERT INTO car_comp (car_id, description) VALUES
+  (1, 'ABS');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (2,'Усилитель руля');
+INSERT INTO car_comp (car_id, description) VALUES
+  (2, 'Усилитель руля');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (4,'Электро-регулировка боковых зеркал');
+INSERT INTO car_comp (car_id, description) VALUES
+  (4, 'Электро-регулировка боковых зеркал');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (7,'Вентиляция передних сидений');
+INSERT INTO car_comp (car_id, description) VALUES
+  (7, 'Вентиляция передних сидений');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (6,'Камера заднего вида');
+INSERT INTO car_comp (car_id, description) VALUES
+  (6, 'Камера заднего вида');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (6,'Обивка сидений кожей');
+INSERT INTO car_comp (car_id, description) VALUES
+  (6, 'Обивка сидений кожей');
 
-INSERT INTO car_comp (car_id,description) VALUES
-  (8,'Центральный подлокотник для задних сидений');
+INSERT INTO car_comp (car_id, description) VALUES
+  (8, 'Центральный подлокотник для задних сидений');
