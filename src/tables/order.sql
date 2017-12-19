@@ -4,23 +4,37 @@
 */
 
 -- Создание таблицы "Заказ"
-CREATE TABLE order
+CREATE TABLE orders
 (
-  id                   NUMBER(10) NOT NULL PRIMARY KEY,
-  customer_id          NUMBER(10) NOT NULL,
-  car_id               NUMBER(10) NOT NULL,
-  status_id            NUMBER(10) NOT NULL,
+  id          NUMBER(10) NOT NULL PRIMARY KEY,
+  customer_id NUMBER(10) NOT NULL,
+  car_id      NUMBER(10) NOT NULL,
+  status_id   NUMBER(10) NOT NULL,
   -- дата создание заказа
-  date_create          DATE       NOT NULL,
+  date_create DATE       NOT NULL,
   -- срок аренды
-  date_start           DATE       NOT NULL,
-  date_end             DATE       NOT NULL,
+  date_start  DATE       NOT NULL,
+  date_end    DATE       NOT NULL,
 
-  CONSTRAINT order_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customer (ID),
-  CONSTRAINT order_car_id_fk FOREIGN KEY (car_id) REFERENCES car (id)
+  CONSTRAINT orders_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customer (ID),
+  CONSTRAINT orders_car_id_fk FOREIGN KEY (car_id) REFERENCES car (id)
+  -- TODO Добавить в триггер https://stackoverflow.com/questions/5332562/using-date-in-a-check-constraint-oracle
+  -- CONSTRAINT orders_check_date_start CHECK (date_start >= SYSDATE),
+  -- CONSTRAINT orders_check_date_end CHECK (date_end >= date_start),
+  -- CONSTRAINT orders_check_date_create CHECK (date_create <= date_start)
 );
 
--- Информация по заказу
+CREATE SEQUENCE order_status_seq;
+-- Создание триггера на авто инкремент
+CREATE TRIGGER order_status_trg
+BEFORE INSERT ON order_status
+FOR EACH ROW
+  BEGIN
+    :new.id := order_status_seq.nextval;
+  END;
+
+
+-- TODO Информация по заказу - Понять как работать с этим
 CREATE VIEW order_info AS
   SELECT
     customer.name,
@@ -31,22 +45,12 @@ CREATE VIEW order_info AS
   WHERE customer.id = order.client_id
         AND car.id = order.car_id;
 
--- Валидация на добавление/обновление заявки
-CREATE TRIGGER order_validate_tg
+-- Триггер на добавление/обновление заявки
+CREATE TRIGGER order_trg
 BEFORE INSERT OR UPDATE
   ON order
   BEGIN
-
-    -- Проверить на то что дата начало не должна быть меньше текущей
-    IF (:NEW.date_start < SYSDATE) AND (:NEW.date_end > :NEW.date_start)
-    THEN
-      raise_application_error
-      (-20000
-      , 'Заявка не может быть создана: время бронирования указано не правильно'
-      );
-
-      -- Проверить есть ли у него не оплаченные счета
-    END IF;
+    -- Проверить есть ли у него не оплаченные счета
     IF payments.amount(:NEW.client_id) > 0
     THEN
       RAISE_APPLICATION_ERROR(
@@ -71,13 +75,13 @@ BEFORE INSERT OR UPDATE
         -- Добавляем счет на оплату
         car_price := orders.calculate(car_id, date_start, date_end);
         --TODO Доделать добавить категорию
-        INSERT INTO payment(customer_id_id, price) VALUES (NEW.customer_id,car_price);
+        INSERT INTO payment (customer_id_id, price) VALUES (NEW.customer_id, car_price);
       WHEN UPDATING
       THEN
         raise_application_error
-      (-20004
-      , 'Заявка не может быть обновлена. Отмените и создайте новую'
-      );
+        (-20004
+        , 'Заявка не может быть обновлена. Отмените и создайте новую'
+        );
     END CASE;
 
   END;

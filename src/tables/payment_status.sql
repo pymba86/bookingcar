@@ -7,14 +7,21 @@
 CREATE TABLE payment_status
 (
   id          NUMBER(10)    NOT NULL PRIMARY KEY,
-  code        VARCHAR2(6)   NOT NULL,
   description VARCHAR2(100)
 );
 
 -- Создание последовательности для суррогатного ключа,таблицы "Статус счета"
 CREATE SEQUENCE payment_status_seq;
 
+-- Создание триггера на авто инкремент
+CREATE TRIGGER payment_status_trg
+BEFORE INSERT ON payment_status
+FOR EACH ROW
+  BEGIN
+    :new.id := payment_status_seq.nextval;
+  END;
+
 -- Заполнение данными таблицы "Статус счета"
-INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'OP', 'оплачен');
-INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'NP', 'не оплачен');
+INSERT INTO payment_status(description) VALUES ('Оплачен');
+INSERT INTO payment_status(description) VALUES ('Не оплачен');
 

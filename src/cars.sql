@@ -10,6 +10,12 @@
 
 CREATE OR REPLACE PACKAGE cars AS
 
+  -- Получить список доступных категорий для клиента
+
+  -- Получить список доступных машин
+
+  -- Получить список машин, которые доступны в данном интервале
+
   -- Доступные категории автомобилей
   PROCEDURE get_categories(cp_customer_id IN car_category.id%TYPE, cat_cursor OUT SYS_REFCURSOR)
   AS

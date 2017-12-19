@@ -1,4 +1,18 @@
-START tables/client.sql
-START tables/car.sql
-START tables/orders.sql
-START client.pks
+/*
+Проект: bookingcar
+Автор: pymba86
+*/
+
+-- Добавление клиентов
+
+START tables/customer.sql;
+
+
+
+-- START tables/car.sql
+-- START tables/orders.sql
+-- START client.pks
+
+
+-- Сохранение промежуточных изменений
+COMMIT;

@@ -6,15 +6,22 @@
 -- Создание таблицы "Статус заказа"
 CREATE TABLE order_status
 (
-  id          NUMBER(10)    NOT NULL PRIMARY KEY,
-  code        VARCHAR2(6)   NOT NULL,
+  id          NUMBER(10) NOT NULL PRIMARY KEY,
   description VARCHAR2(100)
 );
 
--- Создание последовательности для суррогатного ключа,таблицы "Статус оплаты"
-CREATE SEQUENCE payment_status_seq;
+-- Создание последовательности для суррогатного ключа,таблицы "Статус заказа"
+CREATE SEQUENCE order_status_seq;
 
--- Заполнение данными таблицы "Счет"
-INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'SF', 'Сформирован');
-INSERT INTO payment_status VALUES (payment_status_seq.nextval, 'OG', 'Ожидание оплаты');
+-- Создание триггера на авто инкремент
+CREATE TRIGGER order_status_trg
+BEFORE INSERT ON order_status
+FOR EACH ROW
+  BEGIN
+    :new.id := order_status_seq.nextval;
+  END;
+
+-- Заполнение данными таблицы "Статус заказа"
+INSERT INTO order_status (description) VALUES ('Сформирован');
+INSERT INTO order_status (description) VALUES ('Ожидание оплаты');
 

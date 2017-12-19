@@ -12,6 +12,14 @@
 
 CREATE OR REPLACE PACKAGE orders AS
 
+
+  -- Добавить заказ
+
+  -- Добавить доп. услугу к заказу
+
+  -- Сменить статус заказа
+
+
   -- Найти заявки которые попадают в указанный промежуток бронирования для машины
   PROCEDURE find(car_id        IN car.id%TYPE, date_start IN orders.date_start%TYPE,
                  date_end         orders.date_end%TYPE,

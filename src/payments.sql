@@ -10,6 +10,12 @@
 
 CREATE OR REPLACE PACKAGE payments AS
 
+  -- Сменить статус платежа
+
+  -- Проверка на неоплаченные счета
+
+  -- Добавить платеж
+
   -- Общая сумма для оплаты(подсчет суммы не оплаченных счетов)
   FUNCTION amount(cp_customer_id IN customer.id%TYPE)
     RETURN NUMBER;

@@ -20,12 +20,18 @@ CREATE TABLE location
 CREATE SEQUENCE location_seq;
 
 -- Создание триггера на авто инкремент
-CREATE TRIGGER location_tg
+CREATE TRIGGER location_trg
 BEFORE INSERT ON location
+FOR EACH ROW
   BEGIN
     :new.id := location_seq.nextval;
   END;
 
-  -- Заполнение данными таблицы "Локация"
-INSERT INTO location VALUES (1, 'Альфа', 'ул.Гагарина д.25', '89324360407');
-INSERT INTO location VALUES (1, 'Бета', 'ул.Калиниа д.11', '89505318896');
+-- Заполнение данными таблицы "Локация"
+INSERT INTO location(name,
+                     address,
+                     phone) VALUES ('Альфа', 'ул.Гагарина д.25', '89324360407');
+
+INSERT INTO location(name,
+                     address,
+                     phone) VALUES ('Бета', 'ул.Калиниа д.11', '89505318896');
