@@ -1,9 +1,3 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание справочной таблицы "Локация"
 CREATE TABLE location
 (
   id      NUMBER(10) PRIMARY KEY NOT NULL,
@@ -26,7 +20,7 @@ FOR EACH ROW
   BEGIN
     :new.id := location_seq.nextval;
   END;
-
+/
 -- Заполнение данными таблицы "Локация"
 INSERT INTO location(name,
                      address,

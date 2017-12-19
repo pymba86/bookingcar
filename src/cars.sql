@@ -45,8 +45,4 @@ CREATE OR REPLACE PACKAGE cars AS
             OR orders.date_end > date_end;
     END find;
 
-
-  -- Добавить опции автомобилю
-
-
 END; -- cars

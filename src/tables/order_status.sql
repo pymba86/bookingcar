@@ -1,13 +1,7 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание таблицы "Статус заказа"
 CREATE TABLE order_status
 (
   id          NUMBER(10) NOT NULL PRIMARY KEY,
-  description VARCHAR2(100)
+  name VARCHAR2(100)
 );
 
 -- Создание последовательности для суррогатного ключа,таблицы "Статус заказа"
@@ -20,8 +14,8 @@ FOR EACH ROW
   BEGIN
     :new.id := order_status_seq.nextval;
   END;
-
+/
 -- Заполнение данными таблицы "Статус заказа"
-INSERT INTO order_status (description) VALUES ('Сформирован');
-INSERT INTO order_status (description) VALUES ('Ожидание оплаты');
+INSERT INTO order_status (name) VALUES ('Сформирован');
+INSERT INTO order_status (name) VALUES ('Ожидание оплаты');
 

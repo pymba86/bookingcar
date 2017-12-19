@@ -1,9 +1,3 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание таблицы "Выбранные услуги в заказе"
 CREATE TABLE order_service
 (
   id         NUMBER(10) NOT NULL PRIMARY KEY,
@@ -23,4 +17,4 @@ FOR EACH ROW
   BEGIN
     :new.id := order_service_seq.nextval;
   END;
-
+/

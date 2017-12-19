@@ -1,9 +1,3 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание таблицы "Комплектация автомобиля"
 CREATE TABLE car_comp
 (
   id          NUMBER(10)     NOT NULL PRIMARY KEY,
@@ -21,7 +15,7 @@ FOR EACH ROW
   BEGIN
     :new.id := car_comp_seq.nextval;
   END;
-
+/
 -- Заполнение данными таблицы "Комплектация автомобиля"
 INSERT INTO car_comp (car_id,description) VALUES
   (1,'ESP');

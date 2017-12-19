@@ -1,9 +1,3 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание таблицы "Платеж"
 CREATE TABLE payment
 (
   id          NUMBER(10) NOT NULL PRIMARY KEY,
@@ -22,10 +16,12 @@ CREATE TABLE payment
 -- Создание последовательности для суррогатного ключа,таблицы "Платеж"
 CREATE SEQUENCE payment_seq;
 
--- Создание триггера на авто инкремент
+-- Создание триггера на авто инкремент и добавление даты
+-- TODO Добавить авто дату
 CREATE TRIGGER payment_trg
 BEFORE INSERT ON payment
 FOR EACH ROW
   BEGIN
     :new.id := payment_seq.nextval;
   END;
+/

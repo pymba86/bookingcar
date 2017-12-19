@@ -1,9 +1,3 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание таблицы "Машина"
 CREATE TABLE car
 (
   id               NUMBER(10)    NOT NULL PRIMARY KEY,
@@ -13,9 +7,9 @@ CREATE TABLE car
 
   -- Дополнительные данные
   production_year  NUMBER(4),
-  fuel_type_id     NUMBER(10),
-  gearbox_type_id  NUMBER(10),
-  actuator_type_id NUMBER(10),
+  fuel_id     NUMBER(10),
+  gearbox_id  NUMBER(10),
+  actuator_id NUMBER(10),
   doors            NUMBER(2),
   places           NUMBER(2),
 
@@ -39,7 +33,7 @@ FOR EACH ROW
   BEGIN
     :new.id := car_seq.nextval;
   END;
-
+/
 -- Заполнение данными таблицы "Машина"
 INSERT INTO car VALUES (null,'Volvo S40',1,1,2009,1,2,1,4,5,120,2800);
 INSERT INTO car VALUES (null,'Hyundai Solaris',2,1,2010,1,1,1,4,5,114,2950);

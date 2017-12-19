@@ -1,9 +1,3 @@
-/*
-Проект: bookingcar
-Автор: pymba86
-*/
-
--- Создание таблицы "Услуга"
 CREATE TABLE service
 (
   id          NUMBER(10)     NOT NULL PRIMARY KEY,
@@ -25,7 +19,7 @@ FOR EACH ROW
   BEGIN
     :new.id := service_seq.nextval;
   END;
-
+/
 -- Заполнение данными таблицы "Услуга"
 INSERT INTO service (name, description, price) VALUES
   ('Детское кресло',
