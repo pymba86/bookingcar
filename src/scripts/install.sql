@@ -18,14 +18,12 @@ START tables/car_comp.sql;
 START tables/order_status.sql;
 START tables/orders.sql;
 
+-- Добавление Платежей
+START tables/payment.sql;
+
 -- Добавление Услуг
 START tables/service.sql;
 START tables/order_service.sql;
-
--- Добавление Платежей
-START tables/payment_category.sql;
-START tables/payment_status.sql;
-START tables/payment.sql;
 
 -- Добавление пакетов
 START cars.sql;

@@ -9,6 +9,9 @@ CREATE TABLE car_category
 -- Создание последовательности для суррогатного ключа,таблицы "Категория автомобиля"
 CREATE SEQUENCE car_category_seq;
 
+-- Создание индекса на столбец название
+CREATE INDEX car_category_name_idx ON car_category(name);
+
 -- Создание триггера на авто инкремент
 CREATE TRIGGER car_category_trg
 BEFORE INSERT ON car_category

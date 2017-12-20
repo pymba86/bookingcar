@@ -38,7 +38,7 @@ FOR EACH ROW
     WHERE id = :new.car_id;
 
     -- Вставить новый платеж на машину
-    INSERT INTO payment (order_id, status_id, category_id, price, date_create)
-    VALUES (:new.id, 2, 1, price_car, SYSDATE);
+    INSERT INTO payment (order_id, price, date_create)
+    VALUES (:new.id, TRUNC(:new.date_end - :new.date_start) * price_car, SYSDATE);
   END;
   /
