@@ -27,5 +27,15 @@ START tables/payment_category.sql;
 START tables/payment_status.sql;
 START tables/payment.sql;
 
+-- Добавление пакетов
+START cars.sql;
+START payments.sql;
+
+-- Добавление триггеров
+START triggers/orders.sql;
+
+-- Добавление представлений
+START views/car_list.sql;
+
 -- Сохранение промежуточных изменений
 COMMIT;

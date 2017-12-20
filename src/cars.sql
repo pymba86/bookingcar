@@ -1,48 +1,55 @@
-/*
-Автор: pymba86
-Содержит:
- - пакет для обработки заказов
-Таблицы:
- - payment_status(статус оплаты)
- - client(клиент)
- - client_payment(оплата клиента)
-*/
-
 CREATE OR REPLACE PACKAGE cars AS
 
-  -- Получить список доступных категорий для клиента
+  -- Найти заявки которые попадают в указанный промежуток бронирования для машины
+  PROCEDURE find(car_id        IN car.id%TYPE,
+                 date_start    IN orders.date_start%TYPE,
+                 date_end         orders.date_end%TYPE,
+                 orders_cursor OUT SYS_REFCURSOR);
 
-  -- Получить список доступных машин
+  -- Возможность бронирования машины для данного интервала времени
+  FUNCTION access(
+    car_id     IN car.id%TYPE,
+    date_start IN orders.date_start%TYPE,
+    date_end   IN orders.date_end%TYPE)
+    RETURN BOOLEAN;
 
-  -- Получить список машин, которые доступны в данном интервале
-
-  -- Доступные категории автомобилей
-  PROCEDURE get_categories(cp_customer_id IN car_category.id%TYPE, cat_cursor OUT SYS_REFCURSOR)
-  AS
+END cars;
+/
+CREATE OR REPLACE PACKAGE BODY cars AS
+  FUNCTION access(
+    car_id     IN car.id%TYPE,
+    date_start IN orders.date_start%TYPE,
+    date_end   IN orders.date_end%TYPE)
+    RETURN BOOLEAN
+  IS
+    result  BOOLEAN;
+    v_order orders%ROWTYPE;
+    orders_cursor SYS_REFCURSOR;
     BEGIN
-      OPEN cat_cursor FOR
-      SELECT car_category.*
-      FROM car_category customer
-      WHERE customer.id = cp_customer_id
-            AND car_category.driver_age_min <= customer.birthday
-            AND car_category.driver_experience_min <= customer.date_dlicense;
+      cars.find(car_id, date_start, date_end, orders_cursor);
+      result := FALSE;
+      FETCH orders_cursor INTO v_order;
+      IF orders_cursor%NOTFOUND
+      THEN
+        result := TRUE;
+      END IF;
+      CLOSE orders_cursor;
+      RETURN result;
     END;
 
-  -- Найти машины, которые доступны для бронирования
-  -- в заданный промежуток времени
-  PROCEDURE find(date_start IN orders.date_start%TYPE,
-                 date_end      orders.date_end%TYPE)
+  PROCEDURE find(car_id        IN car.id%TYPE, date_start IN orders.date_start%TYPE,
+                 date_end         orders.date_end%TYPE,
+                 orders_cursor OUT SYS_REFCURSOR)
   AS
     BEGIN
-      SELECT
-        car.id,
-        car.name,
-        car.client_id
-      FROM car, orders
-      WHERE car.id != orders.id
+      OPEN orders_cursor FOR
+      SELECT *
+      FROM orders
+      WHERE orders.car_id = car_id
             AND orders.date_end > date_start
             AND orders.date_start < date_start
             OR orders.date_end > date_end;
     END find;
 
-END; -- cars
+END cars;
+/

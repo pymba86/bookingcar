@@ -4,8 +4,8 @@ CREATE TABLE customer
   name               VARCHAR2(100) NOT NULL,
   phone              VARCHAR2(11)  NOT NULL,
   email              VARCHAR2(100) NOT NULL,
-  birthday           DATE          NOT NULL,
-  driving_experience NUMBER(10)    NOT NULL,
+  age           NUMBER(3)          NOT NULL,
+  driving_experience NUMBER(3)    NOT NULL,
 
   -- Валидация номера телефона
   CONSTRAINT chk__customer_phone CHECK (length(phone) = 11 AND
@@ -27,8 +27,8 @@ FOR EACH ROW
 /
 -- Заполнение тестовыми данными таблицы "Клиент"
 INSERT INTO customer VALUES
-  (NULL, 'Артем Матвейчук', '89324360407', 'pymba1996@live.com', TO_DATE('1996-11-11', 'yyyy-mm-dd'), 2);
+  (NULL, 'Артем Матвейчук', '89324360407', 'pymba1996@live.com', 21, 2);
 INSERT INTO customer VALUES
-  (NULL, 'Иван Иванов', '89324360401', 'ivanov@mail.ru', TO_DATE('2000-01-01', 'yyyy-mm-dd'), 0);
+  (NULL, 'Иван Иванов', '89324360401', 'ivanov@mail.ru', 18, 0);
 INSERT INTO customer VALUES
-  (NULL, 'Олег Аникин', '89505318896', 'anikin@gmail.com', TO_DATE('1971-03-24', 'yyyy-mm-dd'), 20);
+  (NULL, 'Олег Аникин', '89505318896', 'anikin@gmail.com', 45, 20);
